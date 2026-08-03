@@ -1,17 +1,13 @@
-# Default values for helm.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
 replicaCount: 1
 
 image:
   repository: apexshieldacrdev.azurecr.io/life-insurance-app
   pullPolicy: IfNotPresent
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: "life-insurance-app-helm"
 
 serviceAccount:
   create: true
@@ -25,58 +21,32 @@ podLabels: {}
 podSecurityContext: {}
 securityContext: {}
 
-# Service configuration modified for Azure LoadBalancer and port mapping
 service:
   type: LoadBalancer
   port: 80
   targetPort: 3000
 
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
-
-httpRoute:
-  enabled: false
-  annotations: {}
-  parentRefs:
-  - name: gateway
-    sectionName: http
-  hostnames:
-  - chart-example.local
-  rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /headers
-
 resources: {}
 
-# Probe ports updated to point directly to Node.js application port 3000
 livenessProbe:
   httpGet:
     path: /
     port: 3000
+  initialDelaySeconds: 15
+  periodSeconds: 20
+
 readinessProbe:
   httpGet:
     path: /
     port: 3000
+  initialDelaySeconds: 5
+  periodSeconds: 10
 
 autoscaling:
   enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
 
 volumes: []
 volumeMounts: []
-
 nodeSelector: {}
 tolerations: []
 affinity: {}
