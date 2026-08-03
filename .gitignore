@@ -1,0 +1,36 @@
+# Dependencies (never commit node_modules)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment & Security (NEVER commit secrets or API keys)
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Terraform Files
+**/.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs & Build outputs
+logs
+*.log
+dist/
+build/

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Quote | Apex Shield</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    
+    body {
+      background-color: #f1f5f9;
+      background-image: 
+        radial-gradient(at 50% 0%, rgba(37, 99, 235, 0.15) 0px, transparent 70%),
+        radial-gradient(at 100% 0%, rgba(2, 132, 199, 0.12) 0px, transparent 50%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+      min-height: 100vh;
+      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    /* Navigation Bar */
+    nav { 
+      width: 100%; 
+      padding: 16px 50px; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      background: #ffffff; 
+      border-bottom: 2px solid #e2e8f0;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    }
+    
+    .logo-shield {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+      transition: transform 0.2s ease;
+    }
+    .logo:hover .logo-shield { transform: scale(1.05); }
+
+    .logo-text { display: flex; flex-direction: column; }
+    .brand-name { font-size: 22px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; line-height: 1.1; }
+    .brand-tagline { font-size: 11px; font-weight: 700; color: #2563eb; text-transform: uppercase; letter-spacing: 0.8px; margin-top: 2px; }
+
+    .nav-links a { color: #475569; text-decoration: none; margin-left: 28px; font-size: 15px; font-weight: 600; transition: color 0.2s; }
+    .nav-links a:hover { color: #2563eb; }
+
+    /* Main Container */
+    .container { margin: 40px 20px 60px; width: 100%; max-width: 580px; }
+    
+    .card { 
+      background: rgba(255, 255, 255, 0.95); 
+      backdrop-filter: blur(20px); 
+      border-radius: 20px; 
+      border: 1px solid rgba(255, 255, 255, 1); 
+      padding: 36px;
+      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.12); 
+    }
+
+    .greeting { text-align: center; margin-bottom: 20px; }
+    .greeting h1 { font-size: 24px; font-weight: 800; color: #0f172a; }
+    .greeting p { font-size: 14px; color: #64748b; margin-top: 4px; }
+    
+    .data-table { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 24px; }
+    .data-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #e2e8f0; }
+    .data-row:last-child { border-bottom: none; }
+    .label { color: #64748b; font-size: 14px; font-weight: 500; }
+    .value { font-weight: 700; color: #0f172a; font-size: 14px; }
+
+    .premium-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #86efac; border-radius: 14px; padding: 24px; margin-top: 24px; text-align: center; }
+    .premium-box h2 { font-size: 13px; color: #166534; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+    .premium-amount { font-size: 38px; font-weight: 800; color: #15803d; margin: 8px 0; }
+    .advisor { font-size: 13px; color: #374151; }
+    .advisor strong { color: #111827; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo">
+      <a href="/" style="display: flex; align-items: center; gap: 14px; text-decoration: none;">
+        <div class="logo-shield">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" fill="url(#shield-grad)" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M9 12L11 14L15 10" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="shield-grad" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#38bdf8"/>
+                <stop offset="1" stop-color="#1d4ed8"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="brand-name">Apex Shield</span>
+          <span class="brand-tagline">Protecting Legacies &bull; Est. 1978</span>
+        </div>
+      </a>
+    </div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/apply">Apply for Quote</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <div class="greeting">
+        <h1>Quote Summary for <span id="clientName">Valued Client</span></h1>
+        <p id="emailSubtext"></p>
+      </div>
+      
+      <div class="data-table">
+        <div class="data-row"><span class="label">Full Name</span><span class="value" id="fullNameVal"></span></div>
+        <div class="data-row" id="emailRow" style="display: none;"><span class="label">Email Address</span><span class="value" id="emailVal"></span></div>
+        <div class="data-row"><span class="label">Client Age</span><span class="value" id="ageVal"></span></div>
+        <div class="data-row"><span class="label">Desired Coverage</span><span class="value" id="coverageVal"></span></div>
+        <div class="data-row"><span class="label">Term Duration</span><span class="value" id="termVal"></span></div>
+        <div class="data-row"><span class="label">Smoker Status</span><span class="value" id="smokerVal"></span></div>
+      </div>
+
+      <div class="premium-box">
+        <h2>Estimated Monthly Premium</h2>
+        <div class="premium-amount" id="premiumVal"></div>
+        <div class="advisor">Assigned Advisor: <strong id="advisorVal"></strong></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const firstName = params.get('firstName') || '';
+    const lastName = params.get('lastName') || '';
+    const email = params.get('email') || '';
+
+    const fullName = `${firstName} ${lastName}`.trim() || 'Valued Client';
+    
+    document.getElementById('clientName').innerText = firstName ? firstName : fullName;
+    document.getElementById('fullNameVal').innerText = fullName;
+    
+    if (email) {
+      document.getElementById('emailRow').style.display = 'flex';
+      document.getElementById('emailVal').innerText = email;
+      document.getElementById('emailSubtext').innerText = `A copy of this estimate has been prepared for ${email}`;
+    } else {
+      document.getElementById('emailSubtext').innerText = 'Here is your personalized Term Life estimate.';
+    }
+
+    document.getElementById('ageVal').innerText = (params.get('age') || '-') + ' years';
+    document.getElementById('coverageVal').innerText = `$${Number(params.get('coverage') || 0).toLocaleString()}`;
+    document.getElementById('termVal').innerText = `${params.get('term')} Years`;
+    document.getElementById('smokerVal').innerText = params.get('smoker') === 'yes' ? 'Smoker' : 'Non-Smoker';
+    document.getElementById('premiumVal').innerText = (params.get('premium') || '$0') + '/mo';
+    document.getElementById('advisorVal').innerText = params.get('advisor') || 'Pending';
+  </script>
+</body>
+</html>

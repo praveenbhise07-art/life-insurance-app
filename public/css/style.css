@@ -1,0 +1,53 @@
+/* public/css/style.css */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); min-height: 100vh; color: #fff; display: flex; flex-direction: column; }
+
+/* Header & Logo */
+header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(5px); }
+.logo-container { display: flex; align-items: center; gap: 10px; }
+.logo-image { height: 40px; }
+.company-name { font-size: 20px; font-weight: bold; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
+
+/* Main Content Containers */
+main { flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px; }
+.content-area { width: 100%; max-width: 1200px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.card-container { display: flex; justify-content: center; align-items: center; width: 100%; }
+
+/* Glassmorphism Cards */
+.card { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); padding: 40px; width: 100%; max-width: 500px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
+
+/* Typography */
+h1 { font-size: 36px; margin-bottom: 16px; line-height: 1.2; }
+h2 { font-size: 24px; margin-bottom: 10px; font-weight: 600; text-align: center; }
+p.text-body { color: #cbd5e1; font-size: 16px; line-height: 1.6; margin-bottom: 20px; }
+p.subtitle { text-align: center; color: #cbd5e1; font-size: 14px; margin-bottom: 24px; }
+
+/* Forms & Inputs */
+.form-group { margin-bottom: 16px; }
+label { display: block; font-size: 13px; margin-bottom: 6px; color: #e2e8f0; }
+input, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.15); color: #fff; font-size: 14px; outline: none; }
+input:focus, select:focus { border-color: #00d2ff; }
+
+/* Radio Buttons for Smoker Status */
+.radio-group { display: flex; gap: 20px; padding: 10px 0; }
+.radio-label { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #e2e8f0; font-size: 14px; }
+input[type="radio"] { width: auto; appearance: radio; cursor: pointer; }
+
+/* Buttons */
+button, .btn { display: inline-block; text-align: center; text-decoration: none; width: 100%; padding: 14px; border-radius: 8px; border: none; background: linear-gradient(to right, #00c6ff, #0072ff); color: white; font-weight: bold; cursor: pointer; margin-top: 10px; transition: transform 0.2s, box-shadow 0.2s; }
+button:hover, .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4); }
+.btn-secondary { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); }
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.2); }
+
+/* Badge */
+.badge { display: inline-block; background: #0284c7; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-bottom: 8px; }
+
+/* Results Styling */
+.results-card { max-width: 800px; grid-template-columns: 1fr; }
+.quote-summary { text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 20px; margin-bottom: 20px; }
+.premium-display { font-size: 48px; color: #00e676; font-weight: bold; }
+.details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; background: rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 8px; }
+.detail-item { font-size: 14px; color: #cbd5e1; }
+.detail-item strong { color: #fff; font-size: 16px; margin-right: 5px; }
+.advisor-panel { margin-top: 30px; display: flex; align-items: center; gap: 20px; background: rgba(0, 210, 255, 0.1); padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 210, 255, 0.3); }
+.advisor-avatar { font-size: 40px; color: #00c6ff; }

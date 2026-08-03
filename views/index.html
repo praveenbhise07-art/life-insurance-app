@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Shield | Protecting Legacies</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    
+    body {
+      background-color: #f1f5f9;
+      background-image: 
+        radial-gradient(at 50% 0%, rgba(37, 99, 235, 0.15) 0px, transparent 70%),
+        radial-gradient(at 100% 0%, rgba(2, 132, 199, 0.12) 0px, transparent 50%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+      min-height: 100vh;
+      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    /* Navigation Bar */
+    nav { 
+      width: 100%; 
+      padding: 16px 50px; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      background: #ffffff; 
+      border-bottom: 2px solid #e2e8f0;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    }
+    
+    /* Prominent Logo & Shield */
+    .logo-shield {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+      transition: transform 0.2s ease;
+    }
+    .logo:hover .logo-shield {
+      transform: scale(1.05);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-name {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+    .brand-tagline {
+      font-size: 11px;
+      font-weight: 700;
+      color: #2563eb;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 2px;
+    }
+
+    .nav-links a { color: #475569; text-decoration: none; margin-left: 28px; font-size: 15px; font-weight: 600; transition: color 0.2s; }
+    .nav-links a:hover { color: #2563eb; }
+
+    /* Main Container */
+    .container { margin: 40px 20px 60px; width: 100%; max-width: 800px; }
+    
+    .card { 
+      background: rgba(255, 255, 255, 0.95); 
+      backdrop-filter: blur(20px); 
+      border-radius: 20px; 
+      border: 1px solid rgba(255, 255, 255, 1); 
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.12); 
+    }
+
+    .card-hero-banner {
+      position: relative;
+      background: linear-gradient(135deg, rgba(14, 116, 144, 0.9), rgba(30, 58, 138, 0.92)), 
+                  url('https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif') center/cover no-repeat;
+      padding: 48px 36px;
+      text-align: center;
+      color: #ffffff;
+    }
+    
+    .badge { 
+      display: inline-block; 
+      background: rgba(255, 255, 255, 0.2); 
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.4); 
+      color: #ffffff; 
+      padding: 4px 14px; 
+      border-radius: 20px; 
+      font-size: 12px; 
+      font-weight: 700; 
+      letter-spacing: 0.5px;
+      margin-bottom: 12px; 
+    }
+
+    .card-hero-banner h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .card-hero-banner p { font-size: 15px; color: #e0f2fe; font-weight: 400; opacity: 0.95; }
+
+    .card-body { padding: 36px 40px; }
+    p.description { color: #475569; font-size: 15px; line-height: 1.7; margin-bottom: 18px; }
+
+    .cta-banner { 
+      margin-top: 28px; 
+      padding: 24px 28px; 
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe); 
+      border-radius: 14px; 
+      border: 1px solid #bae6fd; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      flex-wrap: wrap; 
+      gap: 16px; 
+    }
+    .cta-text h3 { font-size: 18px; font-weight: 700; color: #0369a1; margin-bottom: 4px; }
+    .cta-text p { color: #0284c7; font-size: 13px; font-weight: 500; }
+
+    .btn { 
+      display: inline-block; 
+      padding: 14px 28px; 
+      border-radius: 10px; 
+      background: linear-gradient(135deg, #0284c7, #2563eb); 
+      color: white; 
+      font-weight: 700; 
+      text-decoration: none; 
+      font-size: 14px; 
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s; 
+      border: none; 
+      cursor: pointer; 
+    }
+    .btn:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.45); 
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo">
+      <a href="/" style="display: flex; align-items: center; gap: 14px; text-decoration: none;">
+        <div class="logo-shield">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" fill="url(#shield-grad)" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M9 12L11 14L15 10" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="shield-grad" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#38bdf8"/>
+                <stop offset="1" stop-color="#1d4ed8"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="brand-name">Apex Shield</span>
+          <span class="brand-tagline">Protecting Legacies &bull; Est. 1978</span>
+        </div>
+      </a>
+    </div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/apply">Apply for Quote</a>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container">
+    <div class="card">
+      <div class="card-hero-banner">
+        <span class="badge">INSURTECH PORTAL</span>
+        <h1>Protecting Legacies for over 45 Years</h1>
+        <p>Decades of expert guidance, now accelerated by modern technology.</p>
+      </div>
+
+      <div class="card-body">
+        <p class="description">
+          Apex Shield was founded in 1978 with a clear mission: to provide families with financial security through trusted Term Life protection. From our roots as a boutique financial advisory, we have grown to protect over 1 million families nationwide.
+        </p>
+        <p class="description">
+          Built on transparency and technology, our new InsurTech portal combines our decades of advisor expertise with instant, precise quote generation—ensuring you get the protection your legacy deserves.
+        </p>
+
+        <div class="cta-banner">
+          <div class="cta-text">
+            <h3>Ready to Secure Your Future?</h3>
+            <p>Generate your personalized Term Life quote in under 30 seconds.</p>
+          </div>
+          <a href="/apply" class="btn">Get My Instant Quote &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
