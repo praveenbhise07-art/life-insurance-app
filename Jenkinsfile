@@ -4,7 +4,7 @@ pipeline {
     environment {
         // Application & Azure Settings
         APP_NAME        = 'life-insurance-app'
-        ACR_NAME        = 'apexshieldacrdev' // Replace 'yourACRName' with your actual ACR name
+        ACR_NAME        = 'apexshieldacrdev'
         ACR_REGISTRY    = "${ACR_NAME}.azurecr.io"
         IMAGE_NAME      = "${ACR_REGISTRY}/${APP_NAME}"
         IMAGE_TAG       = "${BUILD_NUMBER}"
@@ -14,7 +14,7 @@ pipeline {
         SONAR_TOKEN_ID  = 'sonarqube-token'
         AZURE_CREDS_ID  = 'azure-credentials-id'
         
-        // SonarQube Host (Adjust IP/Port if running elsewhere)
+        // SonarQube Host
         SONAR_HOST_URL  = 'http://localhost:9000'
     }
 
@@ -30,7 +30,7 @@ pipeline {
                 sh 'npm install'
                 withCredentials([string(credentialsId: env.SNYK_TOKEN_ID, variable: 'SNYK_TOKEN')]) {
                     sh 'snyk auth $SNYK_TOKEN'
-                    sh 'snyk test || true' 
+                    sh 'snyk test || true'
                 }
             }
         }
@@ -88,21 +88,6 @@ pipeline {
                     sh """
                         az login --service-principal -u \$AZURE_CLIENT_ID -p \$AZURE_CLIENT_SECRET --tenant \$AZURE_TENANT_ID
                         az aks get-credentials --resource-group rg-apexshield-dev --name aks-apexshield-dev --overwrite-existing
-                        
-                        helm upgrade --install ${APP_NAME} ./helm \
-                          --namespace default \
-                          --set image.repository=${IMAGE_NAME} \
-                          --set image.tag=${IMAGE_TAG}
-                    """
-                }
-            }
-        }
-
-        stage('8. Deploy to AKS via Helm') {
-            steps {
-                withCredentials([azureServicePrincipal(env.AZURE_CREDS_ID)]) {
-                    sh """
-                        az aks get-credentials --resource-group rg-apexshield-dev --name aks-apexshield-dev
                         
                         helm upgrade --install ${APP_NAME} ./helm \
                           --namespace default \
