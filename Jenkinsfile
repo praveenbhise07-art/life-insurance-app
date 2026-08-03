@@ -39,9 +39,9 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: env.SONAR_TOKEN_ID, variable: 'SONAR_TOKEN')]) {
                     sh """
-                        npx @sonar/scan \
+                        npx -p node@20 @sonar/scan \
                           -Dsonar.host.url=${SONAR_HOST_URL} \
-                          -Dsonar.token=${SONAR_TOKEN} \
+                          -Dsonar.token=\$SONAR_TOKEN \
                           -Dsonar.projectKey=${APP_NAME} \
                           -Dsonar.projectName="${APP_NAME}" \
                           -Dsonar.sources=. \
