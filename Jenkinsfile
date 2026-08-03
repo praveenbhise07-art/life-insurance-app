@@ -72,9 +72,28 @@ pipeline {
         stage('7. Push Docker Image to ACR') {
             steps {
                 withCredentials([azureServicePrincipal(env.AZURE_CREDS_ID)]) {
-                    sh 'az acr login --name ${ACR_NAME}'
-                    sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG}'
-                    sh 'docker push ${IMAGE_NAME}:latest'
+                    sh """
+                        az login --service-principal -u \$AZURE_CLIENT_ID -p \$AZURE_CLIENT_SECRET --tenant \$AZURE_TENANT_ID
+                        az acr login --name ${ACR_NAME}
+                        docker push ${IMAGE_NAME}:${IMAGE_TAG}
+                        docker push ${IMAGE_NAME}:latest
+                    """
+                }
+            }
+        }
+
+        stage('8. Deploy to AKS via Helm') {
+            steps {
+                withCredentials([azureServicePrincipal(env.AZURE_CREDS_ID)]) {
+                    sh """
+                        az login --service-principal -u \$AZURE_CLIENT_ID -p \$AZURE_CLIENT_SECRET --tenant \$AZURE_TENANT_ID
+                        az aks get-credentials --resource-group rg-apexshield-dev --name aks-apexshield-dev --overwrite-existing
+                        
+                        helm upgrade --install ${APP_NAME} ./helm \
+                          --namespace default \
+                          --set image.repository=${IMAGE_NAME} \
+                          --set image.tag=${IMAGE_TAG}
+                    """
                 }
             }
         }
