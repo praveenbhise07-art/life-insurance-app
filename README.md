@@ -1,4 +1,4 @@
-# 🚀 Enterprise DevSecOps Pipeline: Node.js Microservice on Azure Kubernetes Service (AKS)
+# 🚀 Enterprise DevSecOps Pipeline: Node.js application on Azure Kubernetes Service (AKS)
 
 <div align="center">
 
