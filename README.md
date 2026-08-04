@@ -5,7 +5,9 @@ An end-to-end automated DevSecOps and CI/CD pipeline demonstrating secure cloud 
 ---
 
 ## 🏗️ Architecture & Tech Stack
-<img src="./images/Untitled.png" width="3000" alt="Architecture Diagram">
+<a href="./images/Untitled.png" target="_blank">
+  <img src="./images/Untitled.png" width="100%" alt="Architecture Diagram">
+</a>
 * **Cloud Provider:** Microsoft Azure (Azure Kubernetes Service - AKS)
 * **Infrastructure as Code:** Terraform
 * **Containerization:** Docker (Alpine-based Node.js runtime)
