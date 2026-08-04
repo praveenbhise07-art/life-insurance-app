@@ -1,95 +1,120 @@
-# DevSecOps Pipeline for Node.js Application Deployment to AKS
+# 🚀 Enterprise DevSecOps Pipeline: Node.js Microservice on Azure Kubernetes Service (AKS)
 
-An end-to-end automated DevSecOps and CI/CD pipeline demonstrating secure cloud infrastructure provisioning, container vulnerability scanning, static code analysis, and automated Kubernetes deployment.
+<div align="center">
 
----
+[![Cloud: Azure](https://img.shields.io/badge/Cloud-Microsoft%20Azure-0089D6?style=flat-square&logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com/)
+[![Orchestration: Kubernetes](https://img.shields.io/badge/Orchestration-AKS-326CE5?style=flat-square&logo=kubernetes&logoColor=white)](https://azure.kubernetes.com)
+[![IaC: Terraform](https://img.shields.io/badge/IaC-Terraform-844FBA?style=flat-square&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![CI/CD: Jenkins](https://img.shields.io/badge/CI%2FCD-Jenkins-D24939?style=flat-square&logo=jenkins&logoColor=white)](https://www.jenkins.io/)
+[![Security: Snyk](https://img.shields.io/badge/Security-Snyk-4C4A73?style=flat-square&logo=snyk&logoColor=white)](https://snyk.io/)
+[![Security: Trivy](https://img.shields.io/badge/Security-Trivy-23B9B0?style=flat-square&logo=aquasecurity&logoColor=white)](https://aquasecurity.github.io/trivy/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 
-## 🏗️ Architecture & Tech Stack
-<img width="1221" height="765" alt="image" src="https://github.com/user-attachments/assets/00f91556-8049-49d0-b510-7864b4b7be7e" />
+*An enterprise-grade, fully automated shift-left DevSecOps and CI/CD reference architecture for securely deploying cloud-native Node.js microservices to Azure Kubernetes Service (AKS).*
 
-* **Cloud Provider:** Microsoft Azure (Azure Kubernetes Service - AKS)
-* **Infrastructure as Code:** Terraform
-* **Containerization:** Docker (Alpine-based Node.js runtime)
-* **CI/CD Orchestration:** Jenkins
-* **Security & Compliance Scanning:** Snyk (Dependencies/Code) & Trivy (Container Images)
-* **Package Management & Deployment:** Helm
-* **Ingress & Traffic Management:** NGINX Ingress Controller with TLS termination
-
----
-
-## 🚀 Pipeline Workflow
-
-```
-[ Git Push ] 
-     │
-     ▼
-[ Jenkins CI/CD Pipeline ]
-     ├── 1. Infrastructure Provisioning (Terraform -> Azure AKS)
-     ├── 2. Source Code & Dependency Scanning (Snyk)
-     ├── 3. Docker Image Build & Container Vulnerability Scan (Trivy)
-     ├── 4. Push Secure Artifact to Container Registry
-     └── 5. Helm Chart Deployment to AKS Cluster (with NGINX Ingress)
-```
+</div>
 
 ---
 
-## 📂 Project Structure
+## 🏛️ System Architecture & Workflow
+
+The architecture implements a rigorous **shift-left security posture**, validating source code, third-party dependencies, and container images for vulnerabilities prior to hitting production clusters.
+
+<a href="./images/Untitled.png" target="_blank">
+  <img src="./images/Untitled.png" width="100%" alt="Enterprise DevSecOps Architecture Diagram">
+</a>
+
+### End-to-End Pipeline Stages
+1. **Infrastructure as Code (IaC):** Modular Terraform provisions resource groups, virtual networks, and private/public AKS clusters on Azure.
+2. **Checkout & Source Validation:** Jenkins orchestrates the build triggers upon Git push events.
+3. **Static Application Security Testing (SAST) & SCA:** **Snyk** scans source code and package dependencies (`package.json`) to block known CVEs and license violations.
+4. **Containerization & Image Scanning:** Docker builds an immutable, Alpine-based Node.js container image. **Trivy** performs deep filesystem and layer scanning for critical vulnerabilities.
+5. **Artifact Publishing:** Securely pushed and stored in an Azure Container Registry (ACR) or repository.
+6. **Declarative Release Management:** **Helm** charts handle deployment lifecycle automation into the AKS cluster with strictly constrained resource requests and limits.
+7. **Ingress & Observability:** Traffic routed via NGINX Ingress Controller with automated TLS termination alongside health probes.
+
+---
+
+## 📂 Repository Structure
 
 ```text
-├── terraform/                # Infrastructure provisioning configuration
+├── terraform/                # Infrastructure as Code (Azure VNet, AKS, RG)
 │   ├── main.tf
 │   ├── variables.tf
 │   └── outputs.tf
-├── k8s/                      # Kubernetes manifests and Helm charts
-│   ├── templates/
+├── helm/                     # Declarative Kubernetes Helm charts
+│   ├── templates/            # Deployment, Service, Ingress manifests
 │   ├── Chart.yaml
-│   └── values.yaml
-├── src/                      # Node.js application source code
+│   └── values.yaml           # Environment tuning & resource allocation
+├── src/                      # Node.js application codebase
 │   ├── server.js
 │   ├── package.json
-│   └── Dockerfile
-├── Jenkinsfile               # Automated CI/CD pipeline definition
+│   └── Dockerfile            # Multi-stage, security-hardened container build
+├── images/                   # Architecture blueprints & visual documentation
+│   └── Untitled.png
+├── Jenkinsfile               # Declarative multi-stage CI/CD pipeline script
 └── README.md
 ```
 
 ---
 
-## ⚙️ Key Features & DevSecOps Practices
+## 🛠️ Technology Stack
 
-* **Infrastructure as Code (IaC):** Modular Terraform configuration managing Azure resource groups, virtual networks, and AKS clusters.
-* **Shift-Left Security:** Automated dependency checks via Snyk and deep filesystem/image scanning via Trivy integrated directly into the CI/CD stages to block critical vulnerabilities prior to deployment.
-* **Declarative Deployments:** Application packaging and release management handled cleanly through Helm charts with enforced resource limits and requests.
-* **Secure Ingress Routing:** Exposing services externally via NGINX Ingress with secure HTTP/HTTPS configurations.
+| Domain | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Cloud Provider** | Microsoft Azure | High-availability cloud infrastructure and managed services |
+| **Container Engine** | Azure Kubernetes Service (AKS) | Production-grade container orchestration |
+| **Infrastructure as Code** | Terraform v1.5+ | Declarative cloud resource lifecycle management |
+| **CI/CD Orchestration** | Jenkins | Automated multi-stage pipeline execution |
+| **Security Scanning** | Snyk & Trivy | Dependency vulnerability checks & container layer scanning |
+| **Package Management** | Helm 3 | Templated Kubernetes manifest packaging and releases |
+| **Ingress Controller** | NGINX | Reverse proxy, secure routing, and TLS termination |
 
 ---
 
-## 🛠️ Getting Started & Prerequisites
+## 🔒 Security Best Practices Implemented
+
+* **Shift-Left Vulnerability Gates:** Build jobs fail automatically if Snyk or Trivy identify High or Critical severity CVEs.
+* **Immutable Base Images:** Node.js runtime utilizes explicit digest-pinned Alpine versions to minimize kernel surface exposure.
+* **Principle of Least Privilege:** Dynamic secret injection handled securely through Jenkins Credentials Store rather than inline or plaintext environment variables.
+* **Kubernetes Resource Governance:** Enforced CPU/Memory request and limit boundaries in Helm `values.yaml` to prevent pod resource starvation.
+
+---
+
+## 🚀 Getting Started & Deployment Guide
 
 ### Prerequisites
-* Azure CLI configured with appropriate subscription permissions
-* Terraform (v1.5+)
-* Jenkins server with Docker, kubectl, Helm, and Snyk CLI plugins installed
-* Access to an Azure Container Registry (ACR) or Docker Hub repository
+Ensure your local administrative environment or CI worker has access to the following tools:
+* [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) (Authenticated with subscription write permissions)
+* [Terraform](https://www.terraform.io/) (v1.5.0+)
+* [Helm](https://helm.sh/) (v3.0+)
+* [Kubectl](https://kubernetes.io/docs/tasks/tools/)
 
-### Deployment Steps
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-username/devsecops-nodejs-aks.git
-   cd devsecops-nodejs-aks
-   ```
-2. **Provision Infrastructure:**
-   ```bash
-   cd terraform
-   terraform init
-   terraform plan
-   terraform apply
-   ```
-3. **Configure Jenkins Credentials:**
-   Add your Azure credentials, Snyk API token, and container registry secrets securely to the Jenkins Credential Store.
-4. **Trigger Pipeline:**
-   Commit changes or trigger the `Jenkinsfile` job manually to execute the complete build, scan, and deploy workflow.
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/praveenbhise07-art/life-insurance-app.git
+cd life-insurance-app
+```
+
+### Step 2: Provision Infrastructure via Terraform
+```bash
+cd terraform
+terraform init
+terraform plan -out=tfplan
+terraform apply tfplan
+```
+
+### Step 3: Configure Jenkins Pipeline Credentials
+In your Jenkins dashboard, navigate to **Manage Jenkins > Credentials** and configure the following secret keys:
+* `AZURE_CREDENTIALS` (Service Principal JSON)
+* `SNYK_TOKEN` (API Token for code and dependency auditing)
+* `ACR_CREDENTIALS` (Registry username and password)
+
+### Step 4: Execute Pipeline
+Trigger the pipeline using the provided `Jenkinsfile` from your Jenkins master node or connected worker agents.
 
 ---
 
 ## 📄 License
-This project is licensed under the MIT License.
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
