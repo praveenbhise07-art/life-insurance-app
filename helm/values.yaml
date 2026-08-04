@@ -43,7 +43,10 @@ readinessProbe:
   periodSeconds: 10
 
 autoscaling:
-  enabled: false
+  enabled: true   # Change this from false to true
+  minReplicas: 1  # Minimum pods running when traffic is low
+  maxReplicas: 3  # Maximum pods allowed to scale up under heavy load
+  targetCPUUtilizationPercentage: 50  # Scales up if average CPU usage exceeds 50%
 
 volumes: []
 volumeMounts: []
