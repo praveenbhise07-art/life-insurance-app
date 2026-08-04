@@ -26,8 +26,14 @@ service:
   port: 80
   targetPort: 3000
 
-resources: {}
-
+resources:
+  resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
 livenessProbe:
   httpGet:
     path: /
