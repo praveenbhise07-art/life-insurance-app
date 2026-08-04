@@ -5,44 +5,7 @@ An end-to-end automated DevSecOps and CI/CD pipeline demonstrating secure cloud 
 ---
 
 ## 🏗️ Architecture & Tech Stack
-                                +-----------------------+
-                                |  Developer / Git Push |
-                                +-----------+-----------+
-                                            │
-                                            ▼
-+----------------------------------------------------------------------------------------+
-|                                  Jenkins CI/CD Pipeline                                |
-|                                                                                        |
-|  +--------------------+    +--------------------+    +------------------------------+  |
-|  |     Terraform      |    |        Snyk        |    |            Trivy             |  |
-|  | (Provisions Azure  |--->| (Scans Code &      |--->| (Scans Docker Image for      |  |
-|  |  AKS Infrastructure|    |  Dependencies)     |    |  Vulnerabilities & CVEs)     |  |
-|  +--------------------+    +--------------------+    +--------------+---------------+  |
-|                                                                     │                  |
-|                                                                     ▼                  |
-|                                                      +------------------------------+  |
-|                                                      |     Container Registry       |  |
-|                                                      +--------------+---------------+  |
-|                                                                     │                  |
-|                                                                     ▼                  |
-|                                                      +------------------------------+  |
-|                                                      |     Helm Chart Deployment    |  |
-|                                                      +--------------+---------------+  |
-+----------------------------------------------------------------------------------------+
-                                                                    │
-                                                                    ▼
-+----------------------------------------------------------------------------------------+
-|                              Azure Kubernetes Service (AKS)                            |
-|                                                                                        |
-|                     +--------------------------------------------+                     |
-|                     |           NGINX Ingress Controller         |                     |
-|                     +---------------------+----------------------+                     |
-|                                           │                                            |
-|                                           ▼                                            |
-|                     +--------------------------------------------+                     |
-|                     |        Node.js Application Pods            |                     |
-|                     +--------------------------------------------+                     |
-+----------------------------------------------------------------------------------------+
+                               <img width="1200" height="750" alt="image" src="https://github.com/user-attachments/assets/db702187-36e9-4d75-8e1f-f4acf147bc9f" />
 
 * **Cloud Provider:** Microsoft Azure (Azure Kubernetes Service - AKS)
 * **Infrastructure as Code:** Terraform
