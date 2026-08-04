@@ -19,9 +19,7 @@
 ## 🏛️ System Architecture & Workflow
 
 The architecture implements a rigorous **shift-left security posture**, validating source code, third-party dependencies, and container images for vulnerabilities prior to hitting production clusters.
-<a href="./images/Untitled.png" target="_blank">
-  <img src="./images/Untitled.png" width="100%" alt="Architecture Diagram">
-</a>
+<img width="1302" height="814" alt="image" src="https://github.com/user-attachments/assets/c0cddb60-98ee-426e-8e2c-c0095005d50e" />
 
 ### End-to-End Pipeline Stages
 1. **Infrastructure as Code (IaC):** Modular Terraform provisions resource groups, virtual networks, and private/public AKS clusters on Azure.
