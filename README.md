@@ -19,9 +19,8 @@
 ## 🏛️ System Architecture & Workflow
 
 The architecture implements a rigorous **shift-left security posture**, validating source code, third-party dependencies, and container images for vulnerabilities prior to hitting production clusters.
-
 <a href="./images/Untitled.png" target="_blank">
-  <img src="./images/Untitled.png" width="100%" alt="Enterprise DevSecOps Architecture Diagram">
+  <img src="./images/Untitled.png" width="100%" alt="Architecture Diagram">
 </a>
 
 ### End-to-End Pipeline Stages
